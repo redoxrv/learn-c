@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int *create_frazione(int numeratore, int denumeratore){
+    int *f = malloc(sizeof(int) * 2);
+    if(f == NULL) return NULL;
+    *f = numeratore;
+    f[1] = denumeratore;
+
+    return f;
+}
+
+void print_frazione(int *f){
+    printf("%d/%d\n", *f, f[1]);
+}
+
+void semplifica_frazione(int *f){
+    for(int i = 0; i <= *f && i <= f[1]; i++){
+        if(*f % i == 0 && f[1] % i == 0){
+            *f /= i;
+            f[1] /= i;
+        }
+    }
+}
+
+int main(void){
+    int *f = create_frazione(10, 20);
+    semplifica_frazione(f);    
+    print_frazione(f);
+
+    return 0;
+}
